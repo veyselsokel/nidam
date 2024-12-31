@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-red-100 via-green-100 to-red-100">
+  <div class="min-h-screen bg-gradient-to-br from-red-200 via-green-200 to-red-200">
     <!-- Yılbaşı Elementleri Arka Planı -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden">
-      <div v-for="item in festiveItems" :key="item.id" class="absolute animate-float opacity-30" :style="{
+      <div v-for="item in festiveItems" :key="item.id" class="absolute animate-float opacity-40" :style="{
         left: `${item.x}%`,
         top: `${item.y}%`,
         animationDelay: `${item.delay}s`,
@@ -16,32 +16,50 @@
     <div class="container mx-auto px-4 py-12">
       <!-- Header -->
       <header class="text-center mb-16">
-        <h1
-          class="text-6xl font-bold bg-gradient-to-r from-red-600 to-green-600 text-transparent bg-clip-text animate-pulse-slow">
+        <h1 class="text-6xl font-bold text-red-700 animate-pulse-slow drop-shadow-lg">
           Benim Tatlı Sinirli Meleğim
         </h1>
-        <p class="mt-4 text-xl text-gray-600">Kaşları çatık ama kalbi altın 💝</p>
+        <p class="mt-4 text-2xl text-gray-800 font-semibold">Kaşları çatık ama kalbi altın 💝</p>
       </header>
 
+      <!-- Yeni Yıl Şiiri -->
+      <div class="card bg-white/90 mb-16 max-w-2xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-red-700 mb-6">Yeni Yılda Sen</h2>
+        <div class="prose prose-lg mx-auto text-gray-800 italic">
+          <p>
+            Her yeni yılda açan çiçek gibi,<br />
+            Gözlerindeki ışıltı büyür gecede.<br />
+            Kızgın görünen o tatlı hallerin,<br />
+            En değerli hazinem bu senede.
+          </p>
+          <p class="mt-4">
+            Kaş çatışın, gülüşün, her halin,<br />
+            Renk katar dünyama her an yeniden.<br />
+            Sen varsan, her mevsim bahar,<br />
+            Her gün yılbaşı seninle benim için.
+          </p>
+        </div>
+      </div>
+
       <!-- Sinirlilik Ölçer -->
-      <div class="card text-center mb-16 max-w-md mx-auto">
-        <h2 class="text-2xl font-bold text-red-600 mb-4">Sinir Ölçer 😤</h2>
-        <p class="mb-4">Sinir seviyesi şu an:</p>
+      <div class="card bg-white/90 text-center mb-16 max-w-md mx-auto">
+        <h2 class="text-2xl font-bold text-red-700 mb-4">Yeni Yıl Sinir Ölçer 🎄</h2>
+        <p class="mb-4 text-gray-800">Yeni yıl sinir seviyesi:</p>
         <div class="text-8xl cursor-pointer mb-4" @click="handleAngerLevel">
           <div :class="{ 'animate-bounce': isAngryAnimating }"
             class="transform hover:scale-110 transition-transform inline-block">
             {{ currentMood }}
           </div>
         </div>
-        <p class="text-gray-600">{{ getAngerMessage() }}</p>
+        <p class="text-gray-800 font-medium">{{ getAngerMessage() }}</p>
       </div>
 
       <!-- Nida Mood Metre -->
-      <div class="card mb-16">
-        <h2 class="text-2xl font-bold text-green-600 mb-4">Nida'nın Yılbaşı Mood'u</h2>
+      <div class="card bg-white/90 mb-16">
+        <h2 class="text-2xl font-bold text-green-700 mb-4">Nida'nın Yılbaşı Mood'u</h2>
         <div class="space-y-4">
           <div v-for="(mood, index) in moodStats" :key="index" class="flex items-center justify-between">
-            <span class="text-gray-700">{{ mood.label }}</span>
+            <span class="text-gray-800 font-medium">{{ mood.label }}</span>
             <div class="w-48 bg-gray-200 rounded-full h-4">
               <div class="h-full rounded-full bg-gradient-to-r from-red-500 to-green-500"
                 :style="{ width: `${mood.value}%` }" :class="{ 'animate-pulse': mood.value > 80 }">
@@ -53,9 +71,9 @@
 
       <!-- Mesajlar ve Senaryolar -->
       <div class="grid md:grid-cols-2 gap-8 mb-16">
-        <div class="card">
-          <h2 class="text-2xl font-bold text-red-600 mb-4">Günün Nida Gerçeği</h2>
-          <div class="h-32 flex items-center justify-center text-xl px-4">
+        <div class="card bg-white/90">
+          <h2 class="text-2xl font-bold text-red-700 mb-4">Yeni Yıl Nida Gerçeği</h2>
+          <div class="h-32 flex items-center justify-center text-xl px-4 text-gray-800">
             {{ currentMessage }}
           </div>
           <button @click="changeMessage" class="love-button mt-4 w-full">
@@ -63,10 +81,9 @@
           </button>
         </div>
 
-        <!-- Hayali Senaryolar -->
-        <div class="card">
-          <h2 class="text-2xl font-bold text-green-600 mb-4">Bugünkü Senaryo</h2>
-          <div class="h-32 flex items-center justify-center text-xl px-4">
+        <div class="card bg-white/90">
+          <h2 class="text-2xl font-bold text-green-700 mb-4">Yılbaşı Senaryosu</h2>
+          <div class="h-32 flex items-center justify-center text-xl px-4 text-gray-800">
             {{ currentScenario }}
           </div>
           <button @click="changeScenario" class="love-button mt-4 w-full">
@@ -77,12 +94,12 @@
 
       <!-- Nida Sözlüğü -->
       <div class="grid md:grid-cols-3 gap-6">
-        <div v-for="(entry, index) in nidaDictionary" :key="index" class="card text-center cursor-pointer"
-          @click="revealDefinition(index)">
+        <div v-for="(entry, index) in nidaDictionary" :key="index"
+          class="card bg-white/90 text-center cursor-pointer hover:bg-white/95" @click="revealDefinition(index)">
           <div class="h-40 flex items-center justify-center px-4">
             <div>
-              <h3 class="font-bold text-red-600 mb-2">{{ entry.word }}</h3>
-              <p class="text-lg" :class="{ 'text-gray-700': entry.isRevealed, 'text-red-500': !entry.isRevealed }">
+              <h3 class="font-bold text-red-700 mb-2">{{ entry.word }}</h3>
+              <p class="text-lg" :class="{ 'text-gray-800': entry.isRevealed, 'text-red-600': !entry.isRevealed }">
                 {{ entry.isRevealed ? entry.definition : 'Tanımı görmek için tıkla' }}
               </p>
             </div>
@@ -96,7 +113,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-// Yılbaşı elementleri
+// Yılbaşı elementleri - daha fazla eklendi
 const festiveItems = ref([
   { id: 1, emoji: '🎄', x: 10, y: 20, delay: 0, size: 24 },
   { id: 2, emoji: '🎅', x: 80, y: 40, delay: 1, size: 28 },
@@ -105,6 +122,9 @@ const festiveItems = ref([
   { id: 5, emoji: '🦌', x: 20, y: 85, delay: 2.5, size: 26 },
   { id: 6, emoji: '❄️', x: 60, y: 15, delay: 3, size: 22 },
   { id: 7, emoji: '🔔', x: 40, y: 60, delay: 2.8, size: 24 },
+  { id: 8, emoji: '💝', x: 85, y: 75, delay: 3.2, size: 28 },
+  { id: 9, emoji: '✨', x: 15, y: 45, delay: 2.3, size: 20 },
+  { id: 10, emoji: '🕊️', x: 75, y: 25, delay: 1.8, size: 26 }
 ])
 
 // Sinir ölçer için değişkenler
@@ -126,58 +146,64 @@ const handleAngerLevel = () => {
 
 const getAngerMessage = () => {
   const messages = [
-    "Sakin bir melek 👼",
-    "Hafif gergin 😅",
-    "Kaşlar çatılmaya başladı 🤨",
-    "Tam Nida modunda 😠",
-    "DİKKAT: Maksimum sinir seviyesi 🚨"
+    "Yeni yılın en tatlı meleği 👼",
+    "Minik bir yılbaşı gerginliği 😅",
+    "Geliyo 🤨",
+    "Nida modunda (kaşının çizgisini yerim) 😠",
+    "Veysel bişeyi unuttu 🚨"
   ]
   return messages[angerLevel.value]
 }
 
-// Mood istatistikleri
+// Mood istatistikleri - yılbaşı temalı güncellendi
 const moodStats = ref([
-  { label: 'Sinir Seviyesi', value: 85 },
-  { label: 'Kafada Kurma Seviyesi', value: 95 },
-  { label: 'Senaryo Yazarlığı', value: 98 },
-  { label: 'Kaş Çatıklık Oranı', value: 90 },
+  { label: 'Kafada Kurma', value: 95 },
+  { label: 'Senaryo Yazma', value: 98 },
+  { label: 'Kaş Çatma', value: 85 },
   { label: 'Tatlılık Seviyesi', value: 100 },
+  { label: 'Can Çıkıklığı', value: 110 },
+  { label: 'Yeni Yıl Aşk Seviyesi', value: 100 },
+  { label: 'Libido ;)', value: 198 },
 ])
 
-// Esprili mesajlar
+// Esprili mesajlar - yılbaşı temalı güncellendi
 const loveMessages = [
-  "Kaşların çatık ama kalbim sana açık! 💝",
-  "Senin kafanda kurulan senaryolar Hollywood'u geçti valla! 🎬",
-  "Sinirlenince kaşların milimetrik açıyla yükseliyor, matematik dehası! 📐",
-  "Sen kaş çatınca melekler bile 'Aman dikkat!' diyor 😇",
-  "Yılbaşı ağacından daha parlak gözlerin var, sinirlenince bile! ✨",
-  "Kaş çatma şampiyonluğunu kimseye kaptırmıyorsun! 🏆",
-  "Senin bir 'off ya!' deyişin = 1000 şiir 📝"
+  "Bu yılbaşı hediyem sensin, başka hediye istemem! 🎁",
+  "Senayo yazmaya devam 🎬",
+  "Kafada kurmaya devam 🎬",
+  "Seninle her gün yılbaşı 🎄",
+  "Götünü yerim! 🍑",
+  "Ay'dan daha parlak gözlerin var! ✨",
+  "Hiç ter kokmuyorsun 🤔",
+  "Kaşının çizgisini yerim! 🏆",
 ]
 
-// Senaryo örnekleri
+// Senaryo örnekleri - yılbaşı temalı güncellendi
 const scenarios = [
-  "Bugünkü senaryo: 'Kesin beni düşünmüyordur!' (24/7 aklımdasın 💭)",
-  "Kafadaki film: 'Ya aslında sürpriz hazırlıyorsa?' (Yoo, sadece uyuyorum 😴)",
-  "Günün senaryosu: 'Kesin başka planları var!' (Evet, seninle film izlemek 🎬)",
-  "Bugünün kurgusu: 'Off kesin unuttu!' (Asla unutmam, sadece takvime bakmam gerek 📅)"
+  "Sevgi insanlığın görünmeyen yüzüdür.",
+  "Aşk, sevdiğinin mutluluğunu kendi mutluluğuna tercih etmektir.",
+  "Ben senin; sevgilin, eşin, baban, ağabeyin, arkadaşınım. Biri bitse biri kalır. Seni hiç bırakmayacağım.",
+  "Sesinden öpüyorum, yüreğime serçeler bırakan sesinden…",
+  "Ne kadar seviyorsun dersen; 'Nar' kadar derim.Dışımdan bir ben görünürüm, içimden binlerce sen dökülür. ",
+  "Nida varya seni çok SEVİYORUMMMM!!!!",
+  "Ben senden önce hiçbir şey değildim, seninle birlikte her şey oldum. Sen benim Herşeyimsin",
 ]
 
-// Nida Sözlüğü
+// Nida Sözlüğü - yılbaşı temalı güncellendi
 const nidaDictionary = ref([
   {
-    word: "Nida'ca Sinirlenme",
-    definition: "Dünyalar tatlısı bir kızın kaşlarını çatıp sevimli görünme sanatı 😤",
+    word: "Nida:",
+    definition: "Hem kızgın hem tatlı hem komik hem zeki hem mis gibi kokuyo, tam bir melek 🎄",
     isRevealed: false
   },
   {
-    word: "Senaryo Kurma",
-    definition: "Hollywood'a taş çıkartan hayal gücü ile olayları analiz etme yeteneği 🎭",
+    word: "Ödülün:",
+    definition: "2024'ün en yaratıcı kurgu yazarı 🎭",
     isRevealed: false
   },
   {
-    word: "Off Ya!",
-    definition: "Nida dilinde: Dünyanın en sevimli kızgınlık ifadesi 💝",
+    word: "Veysel!",
+    definition: "Boku yedin 💩",
     isRevealed: false
   },
 ])
@@ -219,11 +245,11 @@ onBeforeUnmount(() => {
 
 <style>
 .love-button {
-  @apply px-6 py-3 bg-gradient-to-r from-red-500 to-green-500 text-white rounded-full font-semibold transform transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95 focus:outline-none;
+  @apply px-6 py-3 bg-gradient-to-r from-red-600 to-green-600 text-white rounded-full font-semibold transform transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95 focus:outline-none;
 }
 
 .card {
-  @apply bg-white/80 backdrop-blur-sm rounded-xl shadow-xl p-6 transition-all duration-300 hover:shadow-2xl hover:scale-[1.02];
+  @apply backdrop-blur-sm rounded-xl shadow-xl p-6 transition-all duration-300 hover:shadow-2xl hover:scale-[1.02];
 }
 
 @keyframes float {
