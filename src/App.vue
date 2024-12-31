@@ -93,7 +93,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 // Yılbaşı elementleri
@@ -201,7 +201,7 @@ const changeScenario = () => {
   currentScenario.value = scenarios[newIndex]
 }
 
-const revealDefinition = (index) => {
+const revealDefinition = (index: number) => {
   nidaDictionary.value[index].isRevealed = true
 }
 
