@@ -72,7 +72,7 @@
       <!-- Mesajlar ve Senaryolar -->
       <div class="grid md:grid-cols-2 gap-8 mb-16">
         <div class="card bg-white/90">
-          <h2 class="text-2xl font-bold text-red-700 mb-4">Yeni Yıl Nida Gerçeği</h2>
+          <h2 class="text-2xl font-bold text-red-700 mb-4">Falan Filan</h2>
           <div class="h-32 flex items-center justify-center text-xl px-4 text-gray-800">
             {{ currentMessage }}
           </div>
@@ -82,7 +82,7 @@
         </div>
 
         <div class="card bg-white/90">
-          <h2 class="text-2xl font-bold text-green-700 mb-4">Yılbaşı Senaryosu</h2>
+          <h2 class="text-2xl font-bold text-green-700 mb-4">Edebiyat Parçalamaca</h2>
           <div class="h-32 flex items-center justify-center text-xl px-4 text-gray-800">
             {{ currentScenario }}
           </div>
@@ -162,7 +162,6 @@ const moodStats = ref([
   { label: 'Kaş Çatma', value: 85 },
   { label: 'Tatlılık Seviyesi', value: 100 },
   { label: 'Can Çıkıklığı', value: 110 },
-  { label: 'Yeni Yıl Aşk Seviyesi', value: 100 },
   { label: 'Libido ;)', value: 198 },
 ])
 
